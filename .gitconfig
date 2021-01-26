@@ -1,0 +1,32 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	# TODO: have a look at this https://dev.to/cloudx/delta-a-new-git-diff-tool-to-rock-your-productivity-2773?signin=true
+	# pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+	editor = vim
+[fetch]
+	prune = true
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+[user]
+	name = Darius Bock
+	email = daribock@gmail.com
+	# TODO: generate singingekey
+	# signingkey = 
+[includeIf "gitdir:Projects/pixel-combo/"]
+  	path = .gitconfig-pixelcombo
+[includeIf "gitdir:Projects/MediaSaturn/"]
+	path = .gitconfig-mediamarktsaturn
+[alias]
+	plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\"
+[fetch "origin"]
+	prune = true
+[pull]
+	rebase = true
+[commit]
+	# TODO: inform about GPG singing
+	# gpgSign = false
+	# TODO: create .gitmessage template
+	template = ~/.gitmessage
+[gpg]
+	# program = gpg
