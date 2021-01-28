@@ -10,10 +10,7 @@
 [user]
 	name = Darius Bock
 	email = daribock@gmail.com
-	# TODO: generate singingekey
-	# signingkey = 
-[includeIf "gitdir:Projects/pixel-combo/"]
-  	path = .gitconfig-pixelcombo
+	signingkey = 1700001F
 [includeIf "gitdir:Projects/MediaSaturn/"]
 	path = .gitconfig-mediamarktsaturn
 [alias]
@@ -24,9 +21,9 @@
 [pull]
 	rebase = true
 [commit]
-	# TODO: inform about GPG singing
-	# gpgSign = false
+	gpgSign = true 
 	# TODO: create .gitmessage template
-	template = ~/.gitmessage
+	# template = ~/.gitmessage
 [gpg]
-	# program = gpg
+	program = gpg
+

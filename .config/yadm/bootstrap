@@ -1,0 +1,35 @@
+#!/bin/sh
+
+system_type=$(uname -s)
+
+###############################################################################
+# TODOs                                                                       #
+###############################################################################
+
+# TODO: configure for linux
+# TODO: configure for windows
+# TODO: add vim configuration
+# TODO: add git configuration
+# TODO: add zsh/oh-my-zsh config
+# config:
+#	-[] git
+#	-[] vim
+#	-[] zsh/oh-my-zsh
+#	-[] docker 
+#	-[] nvm
+
+###############################################################################
+# Notes                                                                       #
+###############################################################################
+# see also https://yadm.io/docs/bootstrap
+# see also https://github.com/junegunn/vim-plug
+
+if [ "$system_type" = "Linux" ]; then
+  # TODO: Add some stuff for Linux!
+  echo "# TODO: Add some stuff for Linux!"
+fi
+
+if [ "$system_type" = "Windows" ]; then
+  # TODO: Add some stuff for Windows!
+  echo "# TODO: Add some stuff for Linux!"
+fi
