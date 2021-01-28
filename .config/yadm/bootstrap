@@ -25,8 +25,40 @@ system_type=$(uname -s)
 # see also https://github.com/junegunn/vim-plug
 
 if [ "$system_type" = "Linux" ]; then
-  # TODO: Add some stuff for Linux!
-  echo "# TODO: Add some stuff for Linux!"
+
+  # install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    else
+      echo "Homebrew is already installed ..."
+  fi
+
+  if ! ls ${HOME}/.oh-my-zsh >/dev/null 2>&1; then
+    echo "Installing Oh-My-ZSH ..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    else
+      echo "Oh-My-ZSH is already installed ..."
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+
+  ##############################################################################
+  # Global Config                                                              #
+  ##############################################################################
+
+  # Ask for the administrator password upfront
+  sudo -v
+
+  ##############################################################################
+  # General Settings                                                           #
+  ##############################################################################
+  # TODO: Apply Gerneral Settings
+  echo "TODO: Apply General Settings"
+
 fi
 
 if [ "$system_type" = "Windows" ]; then
