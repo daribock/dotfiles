@@ -1,35 +1,140 @@
 #!/bin/sh
+# TODOS: ######################################################################
+# TODO: Add somthing for Windoof and MacOS
+# TODO: Add installation script for alacritty something like this https://gist.github.com/Aaronmacaron/8a4e82ed0033290cb2e12d9df4e77efe
+# TODO: yadm encrypt https://yadm.io/docs/encryption
+###############################################################################
 
+# Output Config
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+RED='\033[1;31m'
+NC='\033[0m' # No Color
+
+# Ensure that we are in root
+cd "$HOME" || {
+    echo "Error can't access home directory"
+    exit 1
+}
+
+# get system_type
 system_type=$(uname -s)
 
-###############################################################################
-# TODOs                                                                       #
-###############################################################################
-
-# TODO: configure for linux
-# TODO: configure for windows
-# TODO: add vim configuration
-# TODO: add git configuration
-# TODO: add zsh/oh-my-zsh config
-# config:
-#	-[] git
-#	-[] vim
-#	-[] zsh/oh-my-zsh
-#	-[] docker 
-#	-[] nvm
-
-###############################################################################
-# Notes                                                                       #
-###############################################################################
-# see also https://yadm.io/docs/bootstrap
-# see also https://github.com/junegunn/vim-plug
+sudo -v
 
 if [ "$system_type" = "Linux" ]; then
-  # TODO: Add some stuff for Linux!
-  echo "# TODO: Add some stuff for Linux!"
-fi
+    # TODO: add check for more package manager pacman, yum, ...
+    if command -v apt-get >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Update System..."
+        sudo apt-get update
+        echo "${BLUE}[INFO]${NC}  Install dependencies..."
 
-if [ "$system_type" = "Windows" ]; then
-  # TODO: Add some stuff for Windows!
-  echo "# TODO: Add some stuff for Linux!"
+        # Add the gpg key of the official docker repository
+        if command -v curl >/dev/null 2>&1; then
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        fi
+        # Add apt docker repository
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo apt update
+
+        # Install dependencies
+        sudo apt-get install software-properties-common curl ca-certificates apt-transport-https vim libsecret-1-0 libsecret-1-dev zsh zsh-autosuggestions zsh-syntax-highlighting -y
+        cd /usr/share/doc/git/contrib/credential/libsecret
+        sudo make
+        cd "$HOME" || {
+            echo "Error can't access home directory"
+            exit 1
+        }
+    fi
+
+    if command -v zsh >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Configure zsh..."
+        if [ -d "$HOME/.oh-my-zsh" ]; then
+            echo "${GREEN}[CHECK]${NC}  Oh-my-zsh is already installed"
+        else
+            echo "${BLUE}[INFO]${NC}  Install oh-my-zsh..."
+            # clone git repo
+            git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+        fi
+        if [ -d "$HOME/.oh-my-zsh" ]; then
+            # load ZSH_CUSTOM variable
+            export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+            # check if Spaceship theme is already installed
+            if [ -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
+                echo "${GREEN}[CHECK]${NC}  Spaceship-Prompt is already installed"
+            else
+                echo "${YELLOW}[QUESTION]${NC}  Do you want to install the Spaceship prompt for zsh? (y/n)"
+                read answer_1
+                if [ "$answer_1" != "${answer_1#[Yy]}" ]; then
+
+                    echo "${BLUE}[INFO]${NC}  Install Spaceship-Prompt..."
+                    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+
+                    echo "${BLUE}[INFO]${NC}  Create Symlink for spaceship.zsh-theme to "$ZSH_CUSTOM"..."
+                    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+                fi
+            fi
+        else
+            echo "${RED}[INFO]${NC}  Failed to install oh-my-zsh..."
+        fi
+    fi
+
+    if ! command -v nvm >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Installing nvm..."
+        # Install nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+        # Reload nvm.sh to be able to use nvm https://unix.stackexchange.com/questions/184508/nvm-command-not-available-in-bash-script
+        . $HOME/.nvm/nvm.sh
+    else
+        . $HOME/.nvm/nvm.sh
+        echo "${GREEN}[CHECK]${NC}  Nvm is already installed"
+    fi
+
+    if ! command -v node >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Installing node..."
+        # Install node
+        nvm install stable
+    else
+        echo "${GREEN}[CHECK]${NC}  Node is already installed"
+    fi
+
+    if ! command -v yarn >/dev/null 2>&1; then
+        echo "${YELLOW}[QUESTION]${NC}  Do you want to use yarn as a package manager for node? (y/n)"
+        read answer_2
+        if [ "$answer_2" != "${answer_2#[Yy]}" ]; then
+            echo "${BLUE}[INFO]${NC}  Installing yarn..."
+            npm install --global yarn
+        fi
+    else
+        echo "${GREEN}[CHECK]${NC}  Yarn is already installed"
+    fi
+
+    if command -v yarn >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Custom Settings..."
+        echo "${YELLOW}[QUESTION]${NC}  Do you want to enable Emojis for yarn? (y/n)"
+        read answer_3
+        if [ "$answer_3" != "${answer_3#[Yy]}" ]; then
+            yarn config set -- --emoji true
+        fi
+    fi
+
+    if ! command -v docker >/dev/null 2>&1; then
+        echo "${BLUE}[INFO]${NC}  Install docker..."
+        # Install docker
+        sudo apt install docker-ce
+
+        # Add current user to docker usergroup
+        sudo usermod -aG docker ${USER}
+        su - ${USER}
+    else
+        echo "${GREEN}[CHECK]${NC}  Docker is already installed"
+    fi
+    echo "${BLUE}[INFO]${NC}  Changing the Terminal to zsh..."
+    chsh -s $(which zsh)
 fi
+echo "${BLUE}[INFO]${NC}  You might need to log out and back in for changes to take effect."
+echo "${BLUE}[INFO]${NC}  Updating the yadm repo origin URL..."
+yadm remote set-url origin "https://github.com/daribock/dotfiles.git"
+
+zsh
