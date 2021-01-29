@@ -8,9 +8,6 @@ system_type=$(uname -s)
 
 # TODO: configure for linux
 # TODO: configure for windows
-# TODO: add vim configuration
-# TODO: add git configuration
-# TODO: add zsh/oh-my-zsh config
 # config:
 #	-[] git
 #	-[] vim
