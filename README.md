@@ -1,7 +1,5 @@
-<p align="center">
-    <h1 align="center">Dotfiles</h1>
-    <p align="center">by daribock🤓</p>
-</p>
+# Dotfiles 🔧
+> by daribock🤓
 
 My personal configuration files and scripts. Inspired by [@steinbrueckri](https://github.com/steinbrueckri).
 I use [yadm](https://github.com/TheLocehiliosan/yadm) to manage my dotfiles. Until now it configures 2 [OS systems](#supported-os).

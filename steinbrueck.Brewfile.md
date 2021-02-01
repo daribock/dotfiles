@@ -1,32 +1,44 @@
 #  Steinbrueck Tools 
 
 .Brewfile from Steinbrueck sorted.
-Tools that Steinbrueck uses that could be interesting in the Future.
+Tools that Steinbrueck uses, that could be interesting in the future.
 
+## Homebrew
+
+[tap "homebrew/bundle"](https://github.com/Homebrew/homebrew-bundle)
+[tap "homebrew/cask"](https://github.com/Homebrew/homebrew-cask)
+[tap "homebrew/cask-fonts"](https://github.com/Homebrew/homebrew-cask-fonts)
+[tap "homebrew/cask-versions"](https://github.com/Homebrew/homebrew-cask-versions)
+[tap "homebrew/core"](https://github.com/Homebrew/homebrew-core)
+
+## GitHub
+
+[tap "github/gh"](https://github.com/github/homebrew-gh)
 ## Kubernetes 
 
 [tap "boz/repo"](https://github.com/boz/kail)
-
+[tap "derailed/k9s"](https://github.com/derailed/k9s)
+[tap "derailed/popeye"](https://github.com/derailed/popeye)
 ## Markdown 
 
 [tap "charmbracelet/tap"](https://github.com/charmbracelet/homebrew-tap)
 
+## Open Source Software Company
+
+[tap "comcast/opensource"](https://comcast.github.io/#about)
+
+## denisidoro
+
+[tap "denisidoro/tools"](https://github.com/denisidoro/homebrew-tools)
+[brew "denisidoro/tools/navi"](https://github.com/denisidoro/navi)
+
+## Go
+
+[tap "golangci/tap"](https://github.com/golangci/homebrew-tap)
 
 
 
 
-
-tap "comcast/opensource"
-tap "denisidoro/tools"
-tap "derailed/k9s"
-tap "derailed/popeye"
-tap "github/gh"
-tap "golangci/tap"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
 tap "instrumenta/instrumenta"
 tap "kube-score/tap"
 tap "liamg/tfsec"
@@ -130,7 +142,7 @@ brew "yq"
 brew "boz/repo/kail"
 brew "charmbracelet/tap/glow"
 brew "comcast/opensource/snowdrift"
-brew "denisidoro/tools/navi"
+
 brew "derailed/popeye/popeye"
 brew "superbrothers/zsh-kubectl-prompt/zsh-kubectl-prompt"
 brew "tilt-dev/tap/tilt"
