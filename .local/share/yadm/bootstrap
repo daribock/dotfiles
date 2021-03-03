@@ -1,0 +1,112 @@
+#!/bin/sh
+
+# Because Git submodule commands cannot operate without a work tree, they must
+# be run from within $HOME (assuming this is the root of your dotfiles)
+cd "$HOME"
+
+echo "Init submodules"
+yadm submodule update --recursive --init
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+    echo "pinentry-program /usr/local/bin/pinentry-mac" > ~/.gnupg/gpg-agent.conf
+  # install homebrew if it's missing
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Installing homebrew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    
+
+    if [ "`echo -n`" = "-n" ]; then
+        n=""
+        c="\c"
+    else
+        n="-n"
+        c=""
+    fi
+
+    # note to future overclockedllama
+    # brew bundle dump && mv Brewfile ~/.config/brewfile
+    echo $n "Please enter if you would like to install ALL of overclockedllama's programs (y/n)? "
+    read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ;then
+        if [ -f "$HOME/.config/brewfile" ]; then
+            echo "Updating homebrew bundle"
+            brew bundle --file=~/.config/brewfile
+        fi
+    else
+        brew install vim zsh-autosuggestions zsh-syntax-highlighting coreutils pinentry-mac 2>/dev/null
+        brew cask install visual-studio-code 2>/dev/null
+    fi
+
+
+    if [ -d "$HOME/.config/iterm2" ]; then
+        echo "Setting iTerm preference folder"
+        defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.config/iterm2"
+    fi
+    osascript -e "on run(argv)" -e 'tell application "System Events" to tell every desktop to set picture to argv' -e 'end' $HOME/.config/wallpaper.png
+fi
+
+if command -v apt-get >/dev/null 2>&1; then
+    sudo apt-get update
+    sudo apt-get install vim-gtk zsh-autosuggestions zsh-syntax-highlighting zsh -y
+fi
+
+if command -v pacman >/dev/null 2>&1; then
+    sudo pacman -Syu gvim zsh-autosuggestions zsh-syntax-highlighting zsh --noconfirm
+fi
+
+echo "changing shell to zsh boi"
+chsh -s `which zsh`
+echo "you might need to log out and back in for changes to take effect"
+
+echo "Please enter the name you would like to use for git"
+read name
+echo "Please enter the email address you would like to use for git"
+read email
+
+echo "Do you want to always enable gpg signing" 
+echo "If you do not know what this means just press n"
+echo "(y/n)"
+
+read answer2
+if [ "$answer2" == "${answer2#[Yy]}" ] ;then
+    #user said no
+    git config --global --unset commit.gpgsign  
+    git config --global --unset user.signingkey
+fi
+
+
+git config --global user.name "$name"
+git config --global user.email "$email"
+
+echo "Are you overclockedllama?"
+read ans
+
+if [ "$ans" != "${ans#[Yy]}" ] ;then
+    # user said yes
+
+    yadm decrypt || 
+    (
+        export GPG_TTY=$(tty) && 
+        yadm decrypt ||
+        echo unable to decrypt
+    )
+fi
+echo "Updating the yadm repo origin URL"
+yadm remote set-url origin "git@github.com:soneji/dotfiles.git"
+
+zsh
+
+
+
+
+
+
+
+
+
+
+
+
