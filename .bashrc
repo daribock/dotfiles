@@ -44,3 +44,7 @@ export PATH=$PATH:/Applications/MATLAB_R2019b.app/bin
 export PATH=$PATH:~/.local/bin
 
 SHELL_SESSION_HISTORY=0 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

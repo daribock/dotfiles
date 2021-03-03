@@ -10,8 +10,8 @@
 [user]
 	name = Darius Bock
 	email = daribock@gmail.com
-	signingkey = 1700001F
-[includeIf "gitdir:Projects/MediaSaturn/"]
+	signingkey = 45A28FE9
+[includeIf "gitdir:Projects/MediaMarktSaturn/"]
 	path = .gitconfig-mediamarktsaturn
 [alias]
 	plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"

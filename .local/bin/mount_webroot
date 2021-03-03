@@ -1,2 +1,0 @@
-#!/bin/sh
-sshfs dhaval@soneji.xyz:/var/www /Volumes/DEBIAN_WEBROOT -ovolname=DEBIAN_WEBROOT -oport=6969

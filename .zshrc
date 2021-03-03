@@ -1,70 +1,30 @@
-# shellcheck shell=sh
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.cache/zsh-histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory autocd beep notify
-unsetopt extendedglob nomatch
-bindkey -v
-bindkey '^R' history-incremental-search-backward
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export TERM="xterm-256color"
+# Path to your oh-my-zsh installation.
+export ZSH="/home/daribock/.oh-my-zsh"
 
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+# Path to nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="spaceship"
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git docker docker-compose node)
+
+source $ZSH/oh-my-zsh.sh
+
+# Preferred editor for local and remote sessions
+if [ -n $SSH_CONNECTION ]; then
+   export EDITOR='vim'
 fi
 
-
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
-export PATH=$PATH:/usr/local/sbin
-export PATH=$PATH:~/git-clones/flutter/bin
-export PATH=$PATH:/Library/TeX/texbin
-export PATH=$PATH:/Applications/MATLAB_R2019b.app/bin
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:/Library/Ruby/Gems/2.6.0
-export PATH=$PATH:~/.gem/ruby/2.6.0
-export PATH=$PATH:/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/gems/2.6.0
-export PATH=$PATH:~/.gem/ruby/2.6.0/bin
-#ENABLE_CORRECTION="true"
-#setopt correct_all
-
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-
-#autoload -Uz compinit && compinit -d ~/.cache/zcompdump
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-if [ -x "$(command -v thefuck)" ]; then
-    eval $(thefuck --alias)
-fi
-
-export VIRTUAL_ENV_DISABLE_PROMPT=0
-
-fpath=( "$HOME/.config/zfunctions" $fpath )
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
-if [ -f ~/.config/spaceship-prompt ]; then
-    . ~/.config/spaceship-prompt
-fi
-
-if [ -f "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-if [ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-if [ -f "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-if [ -f "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-if [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-if [ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
