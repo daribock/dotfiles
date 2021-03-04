@@ -28,3 +28,4 @@ if [ -n $SSH_CONNECTION ]; then
    export EDITOR='vim'
 fi
 
+nvm use stable

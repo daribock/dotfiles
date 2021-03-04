@@ -1,20 +1,10 @@
 #!/bin/sh
 
-# Because Git submodule commands cannot operate without a work tree, they must
-# be run from within $HOME (assuming this is the root of your dotfiles)
+# TODO: Make everything module
+# Ensure that we are in root
 cd "$HOME"
 
-TextColorBlue='\033[1;34m'
-TextColorRed='\033[0;31m'
-TextColorOrange='\033[1;31m'
-TextColorYellow='\033[1;33m'
-TextColorGreen='\033[0;32m'
-TextColorNone='\033[0m'
-
 sudo -v 
-
-# echo -e "${TextColorBlue}[ Info ]${TextColorNone}\tInit submodules"
-# yadm submodule update --recursive --init
 
 # TODO: do something for macos (brain needs to think)
 # system_type=$(uname -s)
@@ -59,24 +49,54 @@ sudo -v
 # fi
 
 if command -v apt-get >/dev/null 2>&1; then
+    echo -e "[1/7] 🔄\tUpdate System..."
     sudo apt-get update
-    sudo apt-get install vim zsh-autosuggestions zsh-syntax-highlighting zsh -y
+    echo -e "[2/7] 🔗\tInstall dependencies..."
+    sudo apt-get install vim zsh zsh-autosuggestions zsh-syntax-highlighting -y
 fi
 
 if command -v zsh >/dev/null 2>&1; then
     if [ -d "$Home/.oh-my-zsh" ]; then
         rm -r -f $Home/.oh-my-zsh
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-        git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+    fi
+    echo -e "[3/7] 📥\tInstall oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-        ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" 
+    echo -e "[4/7] 📥\tInstall Spaceship-Prompt..."
+    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+
+    echo -e "[4/7] 🔗\tCreate Symlink for spaceship.zsh-theme to "$ZSH_CUSTOM"..."
+    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme" 
+fi
+
+if command -v nvm >/dev/null 2>&1; then
+    echo -e "[5/7] 📥\tInstalling nvm..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+fi
+
+if command -v node >/dev/null 2>&1; then
+    echo -e "[6/7] 📥\tInstalling node..."
+    nvm install stable
+fi
+
+if command -v yarn >/dev/null 2>&1; then
+    echo -e "[7/7] 📥\tInstalling yarn..."
+    npm install --global yarn
+    echo -e "[7/7] 🔧\tCustom Settings..."
+    echo -e "[7/7] 😃\tDo you want to enable Emojis for yarn? (y/n)"
+    read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ;then
+        yarn config set -- --emoji true
     fi
 fi
 
-if command -v pacman >/dev/null 2>&1; then
-    sudo pacman -Syu gvim zsh-autosuggestions zsh-syntax-highlighting zsh --noconfirm
-fi
+# TODO: get latest release from github for balena cli  
+# curl --silent "https://api.github.com/repos/USER/REPO/releases/latest" | # Get latest release from GitHub api
+#     grep '"tag_name":' |                                                 # Get tag line
+#     sed -E 's/.*"([^"]+)".*/\1/' |
+#     xargs -I {} curl -sOL "https://github.com/USER/REPO/archive/"{}'.tar.gz'
+
 
 echo "Changing shell to zsh boi"
 chsh -s `which zsh`
