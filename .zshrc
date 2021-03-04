@@ -8,6 +8,10 @@ export ZSH="/home/daribock/.oh-my-zsh"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+if [ -d "$HOME/.local/balena-cli" ];then
+	export PATH="$PATH:$HOME/.local/balena-cli"
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -28,4 +32,4 @@ if [ -n $SSH_CONNECTION ]; then
    export EDITOR='vim'
 fi
 
-nvm use stable
+fpath+=${ZDOTDIR:-~}/.zsh_functions
