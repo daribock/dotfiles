@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Ensure that we are in root
 cd "$HOME" || {
-    echo "Error can't access home directory"
+    echo "${RED}[INFO]${NC}  Can't access home directory."
     exit 1
 }
 
@@ -43,7 +43,7 @@ if [ "$system_type" = "Linux" ]; then
         cd /usr/share/doc/git/contrib/credential/libsecret
         sudo make
         cd "$HOME" || {
-            echo "Error can't access home directory"
+            echo "${RED}[INFO]${NC}  Can't access home directory."
             exit 1
         }
     fi
@@ -71,12 +71,12 @@ if [ "$system_type" = "Linux" ]; then
                     echo "${BLUE}[INFO]${NC}  Install Spaceship-Prompt..."
                     git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
-                    echo "${BLUE}[INFO]${NC}  Create Symlink for spaceship.zsh-theme to "$ZSH_CUSTOM"..."
+                    echo "${BLUE}[INFO]${NC}  Create Symlink for spaceship..."
                     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
                 fi
             fi
         else
-            echo "${RED}[INFO]${NC}  Failed to install oh-my-zsh..."
+            echo "${RED}[INFO]${NC}  Failed to install oh-my-zsh."
         fi
     fi
 
@@ -125,8 +125,8 @@ if [ "$system_type" = "Linux" ]; then
         sudo apt install docker-ce
 
         # Add current user to docker usergroup
-        sudo usermod -aG docker ${USER}
-        su - ${USER}
+        sudo usermod -aG docker "${USER}"
+        su - "${USER}"
     else
         echo "${GREEN}[CHECK]${NC}  Docker is already installed"
     fi
