@@ -41,8 +41,8 @@ Currently it only installs all dev tools I use for web development and only on *
 |                `.local/share/fonts`                |                                                .local/share/fonts                                                 |
 |                    `.gitconfig`                    |                               [gitconfig file](https://git-scm.com/docs/git-config)                               |
 |           `.gitconfig-mediamarktsaturn`            |                                               Expends my gitconfig                                                |
-|                `.gitignore_global`                 |                              [Global .[gitignore](https://git-scm.com/docs/gitignore)](https://gist.github.com/subfuzion/db7f57fff2fb6998a16c)                              |
-|                `.gitmessage`                 | My personal [.gitmessage template](https://thoughtbot.com/blog/better-commit-messages-with-a-gitmessage-template) |
+|                `.gitignore_global`                 |                                                 [Global .gitignore](https://gist.github.com/subfuzion/db7f57fff2fb6998a16c)                                                 |
+|                   `.gitmessage`                    | My personal [.gitmessage template](https://thoughtbot.com/blog/better-commit-messages-with-a-gitmessage-template) |
 |                      `.zshrc`                      |                         [zshconfig file](https://wiki.ubuntuusers.de/Zsh/#Konfiguration)                          |
 
 ## How to
@@ -54,11 +54,13 @@ sudo apt install git yadm
 ```
 
 2. Clone git repo with yadm
+
 ```sh
 yadm clone https://github.com/daribock/dotfiles.git
 ```
 
 3. Init bootstrap script
+
 ```sh
 yadm bootstrap
 ```
