@@ -1,4 +1,4 @@
-name: linter
+name: Lint Code Base
 on: push
 
 jobs:
