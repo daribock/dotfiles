@@ -1,5 +1,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
+	# TODO: have a look at this https://dev.to/cloudx/delta-a-new-git-diff-tool-to-rock-your-productivity-2773?signin=true
+	# pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 	editor = vim
 [fetch]
 	prune = true

@@ -1,0 +1,90 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Import additional configuration files
+#
+# Imports are loaded in order, skipping all missing files, with the importing
+# file being loaded last. If a field is already present in a previous import, it
+# will be replaced.
+#
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
+#import:
+#  - /path/to/alacritty.yml
+
+shell:
+  program: /usr/bin/zsh
+  args:
+    - --login
+
+# Startup directory
+#
+# Directory the shell is started in. If this is unset, or `None`, the working
+# directory of the parent process will be used.
+#working_directory: None
+
+window:
+  padding:
+    x: 5
+    y: 0
+
+  # Startup Mode (changes require restart)
+  # startup_mode: Windowed
+  startup_mode: Fullscreen
+
+  # Window title
+  title: Alacritty
+  dynamic_title: true
+
+  # Window class (Linux/BSD only):
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
+# TokyoNight Alacritty Colors
+colors:
+  # Default colors
+  primary:
+    background: "0x1a1b26"
+    foreground: "0xc0caf5"
+
+  # Normal colors
+  normal:
+    black: "0x15161E"
+    red: "0xf7768e"
+    green: "0x9ece6a"
+    yellow: "0xe0af68"
+    blue: "0x7aa2f7"
+    magenta: "0xbb9af7"
+    cyan: "0x7dcfff"
+    white: "0xa9b1d6"
+
+  # Bright colors
+  bright:
+    black: "0x414868"
+    red: "0xf7768e"
+    green: "0x9ece6a"
+    yellow: "0xe0af68"
+    blue: "0x7aa2f7"
+    magenta: "0xbb9af7"
+    cyan: "0x7dcfff"
+    white: "0xc0caf5"
+
+  indexed_colors:
+    - { index: 16, color: "0xff9e64" }
+    - { index: 17, color: "0xdb4b4b" }
+
+# Mouse
+mouse:
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: true
+
+  url:
+    launcher:
+      program: open
+      args: []
+
+# Mouse bindings
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
