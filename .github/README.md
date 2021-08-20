@@ -18,8 +18,6 @@ Currently it only installs all dev tools I use for web development and only on *
 |  apt   |     ✅      |
 | pacman |     🚫      |
 |  yum   |     🚫      |
-| Zypper |     🚫      |
-|  DNF   |     🚫      |
 
 #### Tools
 
