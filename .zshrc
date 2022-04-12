@@ -1,7 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export JAVA_HOME=/usr/lib/jvm/java-15-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64
 export JAVA_PATH=$PATH:$JAVA_HOME/bin
+
+# Path to maven 
+export PATH=/opt/apache-maven-3.8.2/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/daribock/.oh-my-zsh"
@@ -24,7 +27,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose node yarn npm pip cargo)
+plugins=(git docker docker-compose node yarn npm pip rust)
 
 source $ZSH/oh-my-zsh.sh
 
