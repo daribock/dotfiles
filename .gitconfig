@@ -7,7 +7,7 @@
 [user]
 	name = Darius Bock
 	email = daribock@gmail.com
-	#signingkey = 917722A394B70FDA
+	signingkey = 5BD5A9CDE82D0B96
 [includeIf "gitdir:~/dev/mediamarktsaturn/"]
 	path = .gitconfig-mediamarktsaturn
 [alias]
@@ -20,7 +20,7 @@
 [pull]
 	rebase = true
 [commit]
-	#gpgSign = true 
+	gpgSign = true 
 	template = ~/.gitmessage
 [gpg]
-	#program = gpg
+	program = gpg
