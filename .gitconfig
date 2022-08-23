@@ -1,0 +1,26 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	# pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
+	editor = vim
+[fetch]
+	prune = true
+[user]
+	name = Darius Bock
+	email = daribock@gmail.com
+	signingkey = 5BD5A9CDE82D0B96
+[includeIf "gitdir:~/dev/mediamarktsaturn/"]
+	path = .gitconfig-mediamarktsaturn
+[alias]
+	plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+	dlog = "log --pretty=format:"%h%x09%an%x09%ad%x09%s""
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\"
+	gor = "git fetch -p && git branch -vv | grep gone | cut -d' ' -f 3 | grep . | xargs git branch -D"
+[fetch "origin"]
+	prune = true
+[pull]
+	rebase = true
+[commit]
+	gpgSign = true 
+	template = ~/.gitmessage
+[gpg]
+	program = gpg
