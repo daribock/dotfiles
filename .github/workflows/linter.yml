@@ -13,5 +13,5 @@ jobs:
       - name: Linter
         uses: docker://github/super-linter:v3
         env: 
-          FILTER_REGEX_EXCLUDE: .*.config/yadm/*
+          FILTER_REGEX_EXCLUDE: .*.old-dotfiles*
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
