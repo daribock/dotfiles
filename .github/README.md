@@ -4,8 +4,6 @@
 
 These are my personal dotfiles I use every day. In the folder `.old-dotfiles` you can see my old dotfiles. If you find something interesting, go ahead and take whatever you want. Currently my dotfiles are only for macOS.
 
-# My Dotfiles
-
 ## Use
 
 First of all you need yadm, this can be installed on macOS via homebrew.
