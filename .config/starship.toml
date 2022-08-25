@@ -1,0 +1,221 @@
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "💀 "
+
+[[battery.display]] # "bold red" style and discharging_symbol when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]] # "bold yellow" style and charging_symbol when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+[memory_usage]
+disabled = false
+threshold = 75
+symbol = "💾 "
+style = "bold dimmed green"
+format = '\[$symbol[$ram]($style)\] '
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[username]
+format = '\[[$user]($style)\]'
+
+[cmd_duration]
+format = '\[[⏱  $duration]($style)\]'
+
+[docker_context]
+format = '\[[$symbol$context]($style)\]'
+
+[git_branch]
+symbol = 'git:'
+format = '\[[$symbol$branch]($style)\]'
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+
+[package]
+format = '\[[$symbol$version]($style)\]'
+
+[python]
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+
+[terraform]
+format = '\[[$symbol$workspace]($style)\]'
+
+[aws]
+disabled = true
+format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+
+[c]
+disabled = true
+format = '\[[$symbol($version(-$name))]($style)\]'
+
+[cmake]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[cobol]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[conda]
+disabled = true
+format = '\[[$symbol$environment]($style)\]'
+
+[crystal]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[daml]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[dart]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[deno]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[dotnet]
+disabled = true
+format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
+
+[elixir]
+disabled = true
+format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+
+[elm]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[erlang]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[gcloud]
+format = '\[[$symbol($project)]($style)\]'
+style = "bold yellow"
+
+[golang]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[haskell]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[helm]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[hg_branch]
+disabled = true
+format = '\[[$symbol$branch]($style)\]'
+
+[java]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[julia]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[kotlin]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[nim]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[nix_shell]
+disabled = true
+format = '\[[$symbol$state( \($name\))]($style)\]'
+
+[ocaml]
+disabled = true
+format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
+
+[openstack]
+disabled = true
+format = '\[[$symbol$cloud(\($project\))]($style)\]'
+
+[perl]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[php]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[pulumi]
+disabled = true
+format = '\[[$symbol$stack]($style)\]'
+
+[purescript]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[raku]
+disabled = true
+format = '\[[$symbol($version-$vm_version)]($style)\]'
+
+[red]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[ruby]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[rust]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[scala]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[spack]
+disabled = true
+format = '\[[$symbol$environment]($style)\]'
+
+[sudo]
+disabled = true
+format = '\[[as $symbol]\]'
+
+[swift]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[time]
+disabled = true
+format = '\[[$time]($style)\]'
+
+[vagrant]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[vlang]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
+
+[zig]
+disabled = true
+format = '\[[$symbol($version)]($style)\]'
