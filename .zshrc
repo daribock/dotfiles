@@ -23,16 +23,14 @@ alias kkd='kubectx PROCO-DEV; k9s'
 alias kkt='kubectx PROCO-TEST; k9s'
 alias kkp='kubectx PROCO-PROD; k9s'
 
+# GPG
+## Ref.: https://github.com/keybase/keybase-issues/issues/2798
+export GPG_TTY=$(tty)
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
     [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/bockdar/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bockdar/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/bockdar/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bockdar/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # RUBY
 export PATH="/usr/local/opt/ruby/bin:$PATH"
