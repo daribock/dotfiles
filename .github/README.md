@@ -79,4 +79,9 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 yadm decrypt
 ```
 
-> ⚠️ Don't forget to change permissions to `chmod 600` again
+After decrypting all the files you will need to import the keys/ownertrust.
+
+```shell
+gpg --import "$HOME/.gnupg/.exported-keyring"/*.asc
+gpg --import-ownertrust "$HOME/.gnupg/.exported-keyring"/ownertrust.txt
+```
