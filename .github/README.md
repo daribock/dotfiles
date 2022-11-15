@@ -37,15 +37,15 @@ sudo apt-get install yadm
 yadm clone https://github.com/daribock/dotfiles.git
 ```
 
-#### Install tools with Homebrew
+### Install tools with Homebrew
 
 ```shell
 brew bundle install --file=.Brewfile
 ```
 
-#### Install oh-my-zsh
+### Install oh-my-zsh
 
-##### Submodule
+#### Submodule
 
 Submodules are tracked in [.gitmodules](./../.gitmodules).
 
@@ -61,7 +61,7 @@ Update submodules:
 yadm submodule update
 ```
 
-##### Curl
+#### Curl
 
 ```shell
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
