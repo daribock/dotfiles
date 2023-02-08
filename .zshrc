@@ -38,3 +38,9 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # STARSHIP THEME
 eval "$(starship init zsh)"
+
+# Set JAVA version to openjdk 17
+export JAVA_HOME=`/usr/libexec/java_home -v 17.0`
+
+# Set to use gke-glouc-auth-plugin
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
