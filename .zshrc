@@ -44,3 +44,8 @@ export JAVA_HOME=`/usr/libexec/java_home -v 17.0`
 
 # Set to use gke-glouc-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+source /Users/bockdar/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+# Set PATH to ~/.config/.scripts folder
+export PATH=$PATH:~/.config/.scripts
