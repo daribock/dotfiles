@@ -1,5 +1,5 @@
 *~
-# .gitignore_linux ################################################
+# .gitignore_linux #############################################################
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
 
@@ -12,6 +12,9 @@
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
+# .gitignore_Mac ###############################################################
+# .DS_Store is a file that stores custom attributes of its containing folder 
+.DS_Store
 
 # .gitignore_windows ###########################################################
 # Windows thumbnail cache files
@@ -68,3 +71,7 @@ Sessionx.vim
 
 # Local History for Visual Studio Code
 .history/
+
+# .gitignore_node ##############################################################
+node_modules
+

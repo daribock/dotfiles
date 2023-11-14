@@ -17,11 +17,13 @@ plugins=(git docker node)
 
 source $ZSH/oh-my-zsh.sh
 
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-alias kkd='kubectx PROCO-DEV; k9s'
-alias kkt='kubectx PROCO-TEST; k9s'
-alias kkp='kubectx PROCO-PROD; k9s'
+# Aliases
+alias zshconfig="cat ~/.zshrc"
+alias ohmyzsh="cat ~/.oh-my-zsh"
+alias kkd='kubectx proco-dev; k9s'
+alias kki='kubectx proco-int; k9s'
+alias kkq='kubectx proco-qa; k9s'
+alias kkp='kubectx proco-prod; k9s'
 alias pn=pnpm
 
 # GPG
