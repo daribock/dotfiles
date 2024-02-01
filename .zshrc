@@ -25,6 +25,7 @@ alias kki='kubectx proco-int; k9s'
 alias kkq='kubectx proco-qa; k9s'
 alias kkp='kubectx proco-prod; k9s'
 alias pn=pnpm
+alias work='cd ~/dev/mediamarktsaturn/proco-frontend'
 
 # GPG
 ## Ref.: https://github.com/keybase/keybase-issues/issues/2798

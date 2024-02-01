@@ -15,7 +15,7 @@ tmux send-keys 'cd ~/dev/mediamarktsaturn/proco-frontend/ui; pnpm install; pnpm 
 tmux split-window -v -p 35
 
 # Change directory
-tmux send-keys 'cd ~/dev/mediamarktsaturn/proco-local-env; make run' C-m
+tmux send-keys 'cd ~/dev/mediamarktsaturn/proco-local-env; podman container prune -f; podman image prune -a -f; podman volume prune -f; make run' C-m
 
 # Create new window to work in
 tmux new-window -t $session:1 -n work
