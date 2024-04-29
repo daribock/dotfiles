@@ -13,7 +13,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker node)
+plugins=(git podman node)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -43,12 +43,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 eval "$(starship init zsh)"
 
 # Set JAVA version to openjdk 17
-export JAVA_HOME=`/usr/libexec/java_home -v 17.0`
+#export JAVA_HOME=`/usr/libexec/java_home -v 17.0`
 
 # Set to use gke-glouc-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-source /Users/bockdar/.docker/init-zsh.sh || true # Added by Docker Desktop
-
 # Set PATH to ~/.config/.scripts folder
 export PATH=$PATH:~/.config/.scripts
+

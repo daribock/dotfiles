@@ -11,8 +11,8 @@ tmux new-session -d -s $session -n run
 # Change directory
 tmux send-keys 'cd ~/dev/mediamarktsaturn/proco-frontend/ui; pnpm install; pnpm start' C-m
 
-# Split window vertically and reduce the height of the tabto 35 percent
-tmux split-window -v -p 35
+# Split window vertically
+tmux split-window
 
 # Change directory
 tmux send-keys 'cd ~/dev/mediamarktsaturn/proco-local-env; podman container prune -f; podman image prune -a -f; podman volume prune -f; make run' C-m
