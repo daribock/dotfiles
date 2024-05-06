@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Prompt to ask for the VERSION_NUMBER
+read -p "Enter the VERSION_NUMBER: " VERSION_NUMBER
+
+# Navigate to ./proco-gitops
+cd /Users/bockdar/dev/mediamarktsaturn/proco-gitops || exit
+
+# Navigate to git branch qa
+git checkout qa || { echo "Failed to checkout to qa branch"; exit 1; }
+
+# Pull latest changes
+git pull || { echo "Failed to pull qa"; exit 1; }
+
+# Create new branch called 'fe-qa-VERSION_NUMBER'
+git checkout -b "fe-qa-$VERSION_NUMBER" || { echo "Failed to create new branch"; exit 1; }
+
+# Update frontend_version in apps.yaml
+sed -i '' "s|frontend_version: \"~[0-9].[0-99]*\"|frontend_version: \"~$VERSION_NUMBER\"|g" qa-cluster/apps.yaml || { echo "Failed to update frontend_version in apps.yaml"; exit 1; }
+
+# Create a commit with the message [NoRef-0] FE version update VERSION_NUMBER
+git add qa-cluster/apps.yaml || { echo "Failed to add changes to git"; exit 1; }
+git commit -m "[NoRef-0] Update FE to $VERSION_NUMBER on qa" || { echo "Failed to commit changes"; exit 1; }
+
+echo "Qa successfully updated ✨"
+
+### Update int
+
+# Navigate to git branch qa
+git checkout int || { echo "Failed to checkout to int branch"; exit 1; }
+
+# Pull latest changes
+git pull || { echo "Failed to pull int"; exit 1; }
+
+# Create new branch called 'fe-int-VERSION_NUMBER'
+git checkout -b "fe-int-$VERSION_NUMBER" || { echo "Failed to create new branch"; exit 1; }
+
+# Update frontend_version in apps.yaml
+sed -i '' "s|frontend_version: \"~[0-9].[0-99]*\"|frontend_version: \"~$VERSION_NUMBER\"|g" int-cluster/apps.yaml || { echo "Failed to update frontend_version in apps.yaml"; exit 1; }
+
+# Create a commit with the message [NoRef-0] FE version update VERSION_NUMBER
+git add int-cluster/apps.yaml || { echo "Failed to add changes to git"; exit 2; }
+git commit -m "[NoRef-0] Update FE to $VERSION_NUMBER on int" || { echo "Failed to commit changes"; exit 1; }
+
+echo "Int successfully updated ✨"
+
+echo "Script completed successfully 🎉"
