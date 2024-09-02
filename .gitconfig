@@ -12,10 +12,11 @@
 [alias]
 	plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 	dlog = "log --pretty=format:"%h%x09%an%x09%ad%x09%s""
-	yolo = !git add -A && git commit -m \"$(curl --silent --fail http://whatthecommit.com/index.txt)\"
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
 	rmmb = !git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches
 	amend = !git add -A && git commit --amend --no-edit
-	save = !git add -A && git commit -m 'chore: commit save point'
+	save = !git add -A && git commit -m 'chore: commit save point'	
+	pfl = !git push --force-with-lease
 [fetch "origin"]
 	prune = true
 [pull]
