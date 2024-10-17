@@ -219,3 +219,5 @@ format = '\[[$symbol($version)]($style)\]'
 [zig]
 disabled = true
 format = '\[[$symbol($version)]($style)\]'
+
+command_timeout = 1000

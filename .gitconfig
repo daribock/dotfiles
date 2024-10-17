@@ -17,6 +17,7 @@
 	amend = !git add -A && git commit --amend --no-edit
 	save = !git add -A && git commit -m 'chore: commit save point'	
 	pfl = !git push --force-with-lease
+	rom = !git pull --rebase origin master
 [fetch "origin"]
 	prune = true
 [pull]
