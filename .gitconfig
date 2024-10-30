@@ -27,3 +27,5 @@
 	template = ~/.gitmessage
 [gpg]
 	program = gpg
+[push]
+	autoSetupRemote = true

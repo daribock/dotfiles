@@ -51,3 +51,4 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # Set PATH to ~/.config/.scripts folder
 export PATH=$PATH:~/.config/.scripts
 
+source ~/completion-for-pnpm.zsh
