@@ -5,7 +5,7 @@
 	prune = true
 [user]
 	name = Darius Kletter
-	email = daribock@gmail.com
+	email = darikletter@gmail.com
 	signingkey = 5BD5A9CDE82D0B96
 [includeIf "gitdir:~/dev/mediamarktsaturn/"]
 	path = .gitconfig-mediamarktsaturn
