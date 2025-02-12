@@ -13,7 +13,7 @@
 	plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 	dlog = "log --pretty=format:"%h%x09%an%x09%ad%x09%s""
 	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
-	rmmb = "!sh -c 'git fetch --prune && git branch -vv | grep \"\\[origin/.*: entfernt\\]\" | awk \"{print \\$1}\" > /tmp/local-branches-to-delete && vi /tmp/local-branches-to-delete && xargs -r git branch -d < /tmp/local-branches-to-delete'"
+	rmmb = "!sh -c 'git fetch --prune && git branch -vv | grep \"\\[origin/.*: entfernt\\]\" | awk \"{print \\$1}\" > /tmp/local-branches-to-delete && vi /tmp/local-branches-to-delete && xargs -r git branch -D < /tmp/local-branches-to-delete'"
 	amend = !git add -A && git commit --amend --no-edit
 	save = !git add -A && git commit -m 'chore: commit save point'	
 	pfl = !git push --force-with-lease
