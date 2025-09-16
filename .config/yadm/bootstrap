@@ -1,4 +1,4 @@
 #!/bin/sh
 
 mkdir -p ${HOME}/dev/mediamarktsaturn
-mkdir -p ${HOME}/dev/daribock
+mkdir -p ${HOME}/dev/darikletter
