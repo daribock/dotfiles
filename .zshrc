@@ -52,3 +52,6 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export PATH=$PATH:~/.config/.scripts
 
 source ~/completion-for-pnpm.zsh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

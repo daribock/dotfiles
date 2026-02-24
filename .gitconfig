@@ -26,6 +26,8 @@
 	gpgSign = true 
 	template = ~/.gitmessage
 [gpg]
-	program = gpg
+	program = /opt/homebrew/bin/gpg
 [push]
 	autoSetupRemote = true
+[credential]
+	helper = osxkeychain
