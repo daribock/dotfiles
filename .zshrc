@@ -1,19 +1,12 @@
 # OH-MY-ZSH Config
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""                      # starship owns the prompt
+DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT="true"
+DISABLE_MAGIC_FUNCTIONS="true"    # faster pasting
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="amuse"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git podman node)
+plugins=(git podman)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,6 +19,8 @@ alias kkq='kubectx proco-qa; k9s'
 alias kkp='kubectx proco-prod; k9s'
 alias pn=pnpm
 alias work='cd ~/dev/mediamarktsaturn/proco-frontend'
+alias kerygma='cd ~/dev/darikletter/kerygma-live-translation'
+alias load-nvm='export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm'
 
 # GPG
 ## Ref.: https://github.com/keybase/keybase-issues/issues/2798
@@ -33,17 +28,14 @@ export GPG_TTY=$(tty)
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+    # 
+    # [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
-# RUBY
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# STARSHIP THEME
-eval "$(starship init zsh)"
-
-# Set JAVA version to openjdk 17
-#export JAVA_HOME=`/usr/libexec/java_home -v 17.0`
+# STARSHIP THEME — cached init (regenerates daily)
+if [[ ! -f ~/.cache/starship_init.zsh ]] || [[ -n $(find ~/.cache/starship_init.zsh -mtime +1 2>/dev/null) ]]; then
+  mkdir -p ~/.cache && starship init zsh >| ~/.cache/starship_init.zsh
+fi
+source ~/.cache/starship_init.zsh
 
 # Set to use gke-glouc-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -51,7 +43,17 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # Set PATH to ~/.config/.scripts folder
 export PATH=$PATH:~/.config/.scripts
 
-source ~/completion-for-pnpm.zsh
+# source ~/completion-for-pnpm.zsh
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+# Lazy terraform completion — only loads bashcompinit when terraform is first used
+terraform() {
+  unfunction terraform
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform
+  command terraform "$@"
+}
+
+# opencode
+export PATH=/Users/bockdar/.opencode/bin:$PATH
+
+. "$HOME/.local/bin/env"
