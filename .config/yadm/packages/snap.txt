@@ -1,4 +1,0 @@
-# Desktop apps without an official apt repository (skipped on WSL)
-postman
-rocketchat-desktop
-spotify
