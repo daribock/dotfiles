@@ -12,7 +12,9 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS="true"    # faster pasting
 
-plugins=(git podman)
+plugins=(git)
+(( $+commands[docker] )) && plugins+=(docker)
+(( $+commands[podman] )) && plugins+=(podman)
 
 source $ZSH/oh-my-zsh.sh
 

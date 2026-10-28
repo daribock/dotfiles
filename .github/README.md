@@ -31,7 +31,7 @@ yadm clone https://github.com/daribock/dotfiles.git --bootstrap
    - macOS: [`.Brewfile`](../.Brewfile)
    - Ubuntu: [`apt.txt`](../.config/yadm/packages/apt.txt) first, then
      [`Brewfile.linux`](../.config/yadm/packages/Brewfile.linux) for what apt
-     lacks, nvm via its official installer
+     lacks, nvm via its official installer, Docker (macOS uses podman instead)
    - Ubuntu desktop only (skipped on WSL): Chrome and VS Code from their apt
      repositories, [`apt-desktop.txt`](../.config/yadm/packages/apt-desktop.txt)
      and [`snap.txt`](../.config/yadm/packages/snap.txt)

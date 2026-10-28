@@ -75,6 +75,16 @@ install_packages_ubuntu() {
   apt_install_list "$PACKAGES/apt.txt"
   sudo apt-get install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin
 
+  # Docker on Linux/WSL (podman on macOS). Skip if Docker CE or Docker Desktop already provides it.
+  if ! command -v docker >/dev/null 2>&1; then
+    step "Installing Docker"
+    sudo apt-get install -y docker.io docker-compose-v2 docker-buildx
+  fi
+  if ! id -nG | grep -qw docker; then
+    sudo usermod -aG docker "$USER"
+    echo "Added $USER to the docker group - log out and back in to use docker without sudo."
+  fi
+
   if [ "$IS_WSL" = false ]; then
     step "Installing desktop apps"
     apt_install_list "$PACKAGES/apt-desktop.txt"
