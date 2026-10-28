@@ -3,7 +3,10 @@
 # Global Config                                                               #
 ###############################################################################
 
-# Create cronjob
+# Create cronjob (and add --no-vscode to an existing one; Settings Sync owns extensions)
+if crontab -l 2>/dev/null | grep -q 'brew bundle dump --force --file'; then
+  crontab -l | sed 's/brew bundle dump --force --file/brew bundle dump --force --no-vscode --file/' | crontab -
+fi
 if [ $(crontab -l | grep brew | wc -l) -eq 0 ]; then
   (
     crontab -l

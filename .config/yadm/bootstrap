@@ -3,6 +3,7 @@
 set -euo pipefail
 
 PACKAGES="$HOME/.config/yadm/packages"
+GPG_KEY=5BD5A9CDE82D0B96
 OS="$(uname -s)"
 IS_WSL=false
 grep -qi microsoft /proc/version 2>/dev/null && IS_WSL=true
@@ -39,6 +40,29 @@ add_apt_repo() {
   echo "deb [signed-by=/usr/share/keyrings/$name.gpg] $repo_line" | sudo tee "/etc/apt/sources.list.d/$name.list" >/dev/null
 }
 
+# Install the packages of a list that exist in this Ubuntu release, skip the rest
+apt_install_list() {
+  local pkg available=()
+  while read -r pkg; do
+    if apt-cache show "$pkg" >/dev/null 2>&1; then
+      available+=("$pkg")
+    else
+      echo "Skipping $pkg: not available in this Ubuntu release"
+    fi
+  done < <(read_list "$1")
+  sudo apt-get install -y "${available[@]}"
+}
+
+# Install a vendor .deb once; its postinst adds the vendor's apt repo for updates
+install_deb() {
+  local pkg="$1" url="$2" deb
+  dpkg -s "$pkg" >/dev/null 2>&1 && return 0
+  deb="$(mktemp --suffix=.deb)"
+  curl -fsSL -o "$deb" "$url"
+  sudo apt-get install -y "$deb"
+  rm -f "$deb"
+}
+
 install_packages_ubuntu() {
   step "Installing apt packages"
   sudo apt-get update
@@ -47,27 +71,17 @@ install_packages_ubuntu() {
     https://packages.cloud.google.com/apt/doc/apt-key.gpg \
     "https://packages.cloud.google.com/apt cloud-sdk main" \
     packages.cloud.google.com/apt
-  if [ "$IS_WSL" = false ]; then
-    add_apt_repo google-chrome \
-      https://dl.google.com/linux/linux_signing_key.pub \
-      "https://dl.google.com/linux/chrome/deb/ stable main" \
-      dl.google.com/linux/chrome
-    add_apt_repo vscode \
-      https://packages.microsoft.com/keys/microsoft.asc \
-      "https://packages.microsoft.com/repos/code stable main" \
-      packages.microsoft.com/repos/code
-  fi
   sudo apt-get update
-  # shellcheck disable=SC2046
-  sudo apt-get install -y $(read_list "$PACKAGES/apt.txt") \
-    google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin
+  apt_install_list "$PACKAGES/apt.txt"
+  sudo apt-get install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin
 
   if [ "$IS_WSL" = false ]; then
     step "Installing desktop apps"
-    # shellcheck disable=SC2046
-    sudo apt-get install -y $(read_list "$PACKAGES/apt-desktop.txt") google-chrome-stable code
+    apt_install_list "$PACKAGES/apt-desktop.txt"
+    install_deb google-chrome-stable https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    install_deb code "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
     read_list "$PACKAGES/snap.txt" | while read -r snap; do
-      sudo snap install "$snap" </dev/null
+      sudo snap install "$snap" </dev/null || echo "Failed to install snap $snap"
     done
   fi
 
@@ -108,15 +122,21 @@ set_default_shell() {
 }
 
 import_gpg_key() {
-  if gpg --list-secret-keys 5BD5A9CDE82D0B96 >/dev/null 2>&1; then
+  local answer=""
+  if gpg --list-secret-keys "$GPG_KEY" >/dev/null 2>&1; then
     echo "Already imported."
     return 0
   fi
-  read -r -p "Decrypt and import the personal GPG signing key? [y/N] " answer
+  read -r -p "Decrypt and import the personal GPG signing key? [y/N] " answer || true
   if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
-    yadm decrypt
+    # Only extract the GPG export; older archives also contain SSH keys
+    gpg -d "$HOME/.local/share/yadm/archive" | tar -x -C "$HOME" --wildcards '.gnupg/.exported-keyring/*'
     gpg --import "$HOME/.gnupg/.exported-keyring"/*.asc
     gpg --import-ownertrust "$HOME/.gnupg/.exported-keyring/ownertrust.txt"
+  elif ! grep -qs 'gpgSign = false' "$HOME/.gitconfig.local"; then
+    # Without the key every commit would fail, so turn signing off on this machine
+    printf '[commit]\n\tgpgSign = false\n' >>"$HOME/.gitconfig.local"
+    echo "Commit signing disabled in ~/.gitconfig.local"
   fi
 }
 

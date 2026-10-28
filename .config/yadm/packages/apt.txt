@@ -28,6 +28,5 @@ ruby
 silversearcher-ag
 starship
 tmux
-unbound
 yadm
 yarnpkg

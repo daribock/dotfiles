@@ -74,7 +74,9 @@ belongs to.
 
 Commits are signed with GPG. The key is stored in the
 [yadm encrypted archive](https://yadm.io/docs/encryption). Bootstrap asks
-whether to import it, so work machines can skip it. To do it manually:
+whether to import it, so work machines can skip it. If you skip it, bootstrap
+turns commit signing off for that machine in `~/.gitconfig.local`. To import
+it manually:
 
 ```shell
 yadm decrypt
@@ -87,5 +89,5 @@ After changing the key, export it with
 
 ## Machine-specific settings
 
-Anything that should only exist on one machine goes into `~/.zshrc.local`,
-which is sourced at the end of `.zshrc` and never tracked.
+Anything that should only exist on one machine goes into `~/.zshrc.local` or
+`~/.gitconfig.local`. They are loaded last and never tracked.

@@ -44,7 +44,8 @@ echo ""
 echo "Add it at https://github.com/settings/ssh/new (title: $COMMENT)"
 
 if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
-  read -r -p "gh is logged in - upload the key with 'gh ssh-key add' now? [y/N] " answer
+  answer=""
+  read -r -p "gh is logged in - upload the key with 'gh ssh-key add' now? [y/N] " answer || true
   if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
     gh ssh-key add "$KEY.pub" --title "$COMMENT"
   fi

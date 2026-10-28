@@ -31,3 +31,6 @@
 	autoSetupRemote = true
 [init]
 	defaultBranch = main
+[include]
+	# Machine-specific overrides, never tracked
+	path = ~/.gitconfig.local

@@ -37,7 +37,7 @@ if [[ -z $SSH_AUTH_SOCK ]]; then
   export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
   ssh-add -l &>/dev/null
   if (( $? == 2 )); then
-    rm -f "$SSH_AUTH_SOCK"
+    mkdir -p -m 0700 "$HOME/.ssh" && rm -f "$SSH_AUTH_SOCK"
     eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" >/dev/null
   fi
 fi
