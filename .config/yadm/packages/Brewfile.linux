@@ -1,6 +1,2 @@
 # Only what Ubuntu's apt does not provide
-brew "k9s"
 brew "pnpm"
-brew "vcprompt"
-tap "mongodb/brew"
-brew "mongodb/brew/mongodb-database-tools"
