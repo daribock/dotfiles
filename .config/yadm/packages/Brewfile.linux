@@ -1,0 +1,2 @@
+# Only what Ubuntu's apt does not provide
+brew "pnpm"

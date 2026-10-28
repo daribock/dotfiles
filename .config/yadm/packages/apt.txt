@@ -1,0 +1,19 @@
+# Ubuntu packages, installed by yadm bootstrap (apt first, brew only for what is missing here)
+# Base
+curl
+git
+gnupg
+wget
+zsh
+# CLI tools
+bash
+ffmpeg
+gnutls-bin
+id3v2
+python3
+python3-venv
+rename
+silversearcher-ag
+starship
+tmux
+yadm

@@ -7,6 +7,8 @@
 	name = Darius Kletter
 	email = darikletter@gmail.com
 	signingkey = 5BD5A9CDE82D0B96
+[include]
+	path = ~/.gitconfig-os
 [includeIf "gitdir:~/dev/mediamarktsaturn/"]
 	path = .gitconfig-mediamarktsaturn
 [alias]
@@ -25,11 +27,10 @@
 [commit]
 	gpgSign = true 
 	template = ~/.gitmessage
-[gpg]
-	program = /opt/homebrew/bin/gpg
 [push]
 	autoSetupRemote = true
-[credential]
-	helper = osxkeychain
 [init]
 	defaultBranch = main
+[include]
+	# Machine-specific overrides, never tracked
+	path = ~/.gitconfig.local
