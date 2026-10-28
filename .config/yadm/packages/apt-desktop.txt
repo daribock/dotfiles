@@ -1,0 +1,3 @@
+# Desktop apps from Ubuntu apt (skipped on WSL)
+keepassxc
+vlc

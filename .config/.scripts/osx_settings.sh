@@ -8,7 +8,7 @@ if [ $(crontab -l | grep brew | wc -l) -eq 0 ]; then
   (
     crontab -l
     echo "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    echo "0 */3 * * * brew bundle dump --force --file ~/.Brewfile"
+    echo "0 */3 * * * brew bundle dump --force --no-vscode --file ~/.Brewfile"
   ) | crontab -
 fi
 
