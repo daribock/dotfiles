@@ -1,0 +1,6 @@
+# macOS-only git settings, linked to ~/.gitconfig-os by yadm
+[credential]
+	helper = osxkeychain
+# GUI apps (e.g. VS Code) do not get Homebrew on PATH
+[gpg]
+	program = /opt/homebrew/bin/gpg

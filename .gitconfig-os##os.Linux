@@ -1,0 +1,2 @@
+# Linux-only git settings, linked to ~/.gitconfig-os by yadm
+# Remotes use SSH, so no credential helper is needed.
