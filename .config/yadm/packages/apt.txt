@@ -17,16 +17,10 @@ jq
 kubectx
 libharfbuzz-bin
 maven
-default-jdk
-openjdk-17-jdk
-podman
 python3
 python3-venv
-qemu-system
 rename
-ruby
 silversearcher-ag
 starship
 tmux
 yadm
-yarnpkg
