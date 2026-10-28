@@ -1,6 +1,5 @@
 # Ubuntu packages, installed by yadm bootstrap (apt first, brew only for what is missing here)
 # Base
-build-essential
 curl
 git
 gnupg
@@ -10,13 +9,7 @@ zsh
 bash
 ffmpeg
 gnutls-bin
-golang-go
-hugo
 id3v2
-jq
-kubectx
-libharfbuzz-bin
-maven
 python3
 python3-venv
 rename
