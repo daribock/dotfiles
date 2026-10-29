@@ -76,3 +76,6 @@ fi
 
 # Machine-specific settings, never tracked
 [[ -f $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
+
+# Add bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
